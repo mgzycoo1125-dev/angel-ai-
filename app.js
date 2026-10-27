@@ -128,17 +128,12 @@
       $("promptInput").focus();
     }, settings.motion ? 520 : 40);
   }
-  let previousFocus = null;
   function openSettings() {
-    previousFocus = document.activeElement;
     $("settingsBackdrop").classList.remove("hidden");
     $("closeSettings").focus();
     $("sidebar").classList.remove("open");
   }
-  function closeSettings() {
-    $("settingsBackdrop").classList.add("hidden");
-    if (previousFocus && typeof previousFocus.focus === "function") previousFocus.focus();
-  }
+  function closeSettings() { $("settingsBackdrop").classList.add("hidden"); }
   function closeSidebar() { $("sidebar").classList.remove("open"); }
   function exportCurrentChat() {
     const chat = currentChat();
@@ -146,8 +141,8 @@
     const content = [`ANGEL AI — ${chat.title}`, `Created: ${chat.createdAt}`, "", ...chat.messages.map(m => `${m.role === "user" ? "You" : "ANGEL"}:\n${m.text}\n`)].join("\n");
     const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a"); a.href=url; a.download=`angel-chat-${chat.id}.txt`; a.style.display="none"; document.body.append(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000); showToast("Export started.");
+    const a = document.createElement("a"); a.href=url; a.download=`angel-chat-${chat.id}.txt`; a.click();
+    URL.revokeObjectURL(url); showToast("Export started.");
   }
   function clearAllChats() {
     if (!confirm("Clear all saved ANGEL conversations from this browser? This cannot be undone.")) return;
@@ -180,6 +175,7 @@
   $("exportChat").addEventListener("click", exportCurrentChat);
   $("clearAll").addEventListener("click", clearAllChats);
   $("mobileMenu").addEventListener("click", () => $("sidebar").classList.toggle("open"));
+  $("closeSidebarButton").addEventListener("click", closeSidebar);
   window.matchMedia("(prefers-color-scheme: light)").addEventListener?.("change", () => { if (settings.theme === "system") applySettings(); });
 
   applySettings(); renderHistory();

@@ -1,5 +1,5 @@
-const CACHE_NAME = "angel-ai-shell-v3";
-const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./manifest.json", "./angel-logo.svg"];
+const CACHE_NAME = "angel-ai-shell-v2";
+const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./manifest.json"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
 });
