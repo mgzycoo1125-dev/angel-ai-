@@ -1,0 +1,14 @@
+{
+  "name": "ANGEL AI",
+  "short_name": "ANGEL",
+  "description": "ANGEL AI — your AI, your world. A gold-and-black chat UI prototype.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#090909",
+  "theme_color": "#090909",
+  "icons": [
+    {"src":"angel-logo.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
